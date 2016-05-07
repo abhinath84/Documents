@@ -1,0 +1,19 @@
+Add new local repo in remote:
+ - create a new repo in remote github
+ - initialize your local project into git repo
+   -> git init
+
+ - Add local project to git repo
+   -> git add .
+
+ - commit local project to git repo
+   -> commit -ma "<commit comment>"
+
+ - add remote repo
+   -> git remote add origin <remote git repo link>
+
+ - push local project to remote git repo
+   -> git push -u origin master
+
+ - you done!
+
