@@ -73,7 +73,11 @@ BITMAPINFOHEADER Bitmap::getInfoHeader() const
 
 void Bitmap::setPixelArray(unsigned char *pixelArray)
 {
-	memcpy(p_pixelArray, pixelArray, sizeof(pixelArray));
+  if(p_pixelArray == NULL)
+    p_pixelArray = (unsigned char*)malloc(m_pixelArraySize);
+
+  memset(p_pixelArray, 0xff, m_pixelArraySize);
+  memcpy(p_pixelArray, pixelArray, m_pixelArraySize);
 }
 
 void Bitmap::setBitmapSize(DWORD size)
