@@ -2,7 +2,10 @@
 #define BITMAP_H
 
 #include <stdio.h>
+#include <math.h>
+
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -15,8 +18,9 @@ typedef signed long     LONG;
 #define BI_RGB          0L
 
 
-// I don't know what is the use of this??
-// Please find it.
+// To pack a class is to place its members directly after each other in memory, 
+// which can mean that some or all members can be aligned on a boundary smaller 
+// than the default alignment the target architecture.
 #pragma pack(push, 2)
 
 
@@ -49,6 +53,38 @@ typedef struct BitmapFileHeader
   WORD    m_reserved2;
   DWORD   m_offBits;
 }BITMAPFILEHEADER;
+
+struct RGBApixel
+{
+  RGBApixel()
+  {
+    red = 0;
+    green = 0;
+    blue = 0;
+    alpha = 0;
+  }
+
+  RGBApixel(unsigned char r, unsigned char g, unsigned char b)
+  {
+    red = r;
+    green = g;
+    blue = b;
+    alpha = 0;
+  }
+
+  RGBApixel(unsigned char r, unsigned char g, unsigned char b, unsigned char a)
+  {
+    red = r;
+    green = g;
+    blue = b;
+    alpha = a;
+  }
+
+  unsigned char red;
+  unsigned char green;
+  unsigned char blue;
+  unsigned char alpha;
+};
 
 // BITMAPINFOHEADER
 // Store the detailed information about BITMAP Image 
@@ -108,34 +144,39 @@ class Bitmap
 {
 public:
   Bitmap();
-  Bitmap(const BITMAPFILEHEADER &bmpFileHeader, const BITMAPINFOHEADER &bmpInfoHeader);
+  Bitmap(LONG imageWidth, LONG imageHeight);
+  Bitmap(LONG imageWidth, LONG imageHeight, WORD bitCount);
   Bitmap(const Bitmap &other);
   ~Bitmap(void);
 
   Bitmap& operator=(const Bitmap &other);
 
   // Methods
-  void setFileHeader(const BITMAPFILEHEADER &bmpFileHeader);
-  BITMAPFILEHEADER getFileHeader() const;
-  void setInfoHeader(const BITMAPINFOHEADER &bmpInfoHeader);
-  BITMAPINFOHEADER getInfoHeader() const;
   void setPixelArray(unsigned char *pixelArray);
 
-  void setBitmapSize(DWORD size);
-  void setPixelArraySize(unsigned int size);
-  void setBitmapWidth(LONG width);
-  void setBitmapHeight(LONG height);
+  void setPixel(int row, int col, const RGBApixel &rgbaPixel);
+  void setPixel(int row, int col, int red, int green, int blue);
+  void setPixel(int row, int col, int red, int green, int blue, int alpha);
+  RGBApixel getPixel(int row, int col);
+
+  void setWidth(LONG width);
+  void setHeight(LONG height);
+  void setSize(LONG width, LONG height);
   void setBitCount(WORD bitCount);
 
-  void write(char *filename);
-  void show(char *filename);
+  void writeToFile(char *filename);
+  void readFromFile(char *filename);
+
+private:
+  DWORD calculatePixelArraySize();
+  bool  convertRGBAToFileFormat();
 
 private:
   BITMAPFILEHEADER  m_bitmapFileHeader;
   BITMAPINFOHEADER  m_bitmapInfoHeader;
   unsigned char*    p_pixelArray;
+  vector< vector<RGBApixel> > m_pixels;
   FILE*             p_file;
-  DWORD             m_pixelArraySize;
 };
 
 #endif
