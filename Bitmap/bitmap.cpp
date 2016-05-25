@@ -2,103 +2,92 @@
 
 
 Bitmap::Bitmap()
-	:m_bitmapFileHeader(),
-	m_bitmapInfoHeader(),
-	p_pixelArray(NULL),
-	p_file(NULL),
-  m_pixelArraySize(0)
+  :m_bitmapFileHeader(),
+  m_bitmapInfoHeader(),
+  p_pixelArray(NULL),
+  p_file(NULL)
 {
 }
 
-Bitmap::Bitmap(const BITMAPFILEHEADER &bmpFileHeader, const BITMAPINFOHEADER &bmpInfoHeader)
-	:m_bitmapFileHeader(bmpFileHeader),
-	m_bitmapInfoHeader(bmpInfoHeader),
-	p_pixelArray(NULL),
-	p_file(NULL),
-  m_pixelArraySize(0)
+Bitmap::Bitmap(LONG imageWidth, LONG imageHeight)
+  :m_bitmapFileHeader(),
+  m_bitmapInfoHeader(),
+  p_pixelArray(NULL),
+  p_file(NULL)
 {
+  m_bitmapInfoHeader.m_width = imageWidth;
+  m_bitmapInfoHeader.m_height = imageHeight;
+  m_bitmapFileHeader.m_size += calculatePixelArraySize();
+}
+
+Bitmap::Bitmap(LONG imageWidth, LONG imageHeight, WORD bitCount)
+  :m_bitmapFileHeader(),
+  m_bitmapInfoHeader(),
+  p_pixelArray(NULL),
+  p_file(NULL)
+{
+  m_bitmapInfoHeader.m_width = imageWidth;
+  m_bitmapInfoHeader.m_height = imageHeight;
+  m_bitmapInfoHeader.m_bitCount = bitCount;
+  m_bitmapFileHeader.m_size += calculatePixelArraySize();
 }
 
 Bitmap::Bitmap(const Bitmap &other)
-	:m_bitmapFileHeader(other.m_bitmapFileHeader),
-	m_bitmapInfoHeader(other.m_bitmapInfoHeader),
-	p_pixelArray(other.p_pixelArray),
-	p_file(other.p_file),
-  m_pixelArraySize(other.m_pixelArraySize)
+  :m_bitmapFileHeader(other.m_bitmapFileHeader),
+  m_bitmapInfoHeader(other.m_bitmapInfoHeader),
+  p_pixelArray(other.p_pixelArray),
+  p_file(other.p_file)
 {
 }
 
 Bitmap& Bitmap::operator=(const Bitmap &other)
 {
-	if(this != &other)
-	{
-		m_bitmapFileHeader = other.m_bitmapFileHeader;
-		m_bitmapInfoHeader = other.m_bitmapInfoHeader;
-		p_pixelArray = other.p_pixelArray;
-		p_file = other.p_file;
-    m_pixelArraySize = other.m_pixelArraySize;
-	}
+  if(this != &other)
+  {
+    m_bitmapFileHeader = other.m_bitmapFileHeader;
+    m_bitmapInfoHeader = other.m_bitmapInfoHeader;
+    p_pixelArray = other.p_pixelArray;
+    p_file = other.p_file;
+  }
 
-	return(*this);
+  return(*this);
 }
 
 Bitmap::~Bitmap()
 {
-	if(p_file != NULL)
-	{
-		fclose(p_file);
-		p_file = NULL;
-	}
-}
-
-void Bitmap::setFileHeader(const BITMAPFILEHEADER &bmpFileHeader)
-{
-	m_bitmapFileHeader = bmpFileHeader;
-}
-
-BITMAPFILEHEADER Bitmap::getFileHeader() const
-{
-	return(m_bitmapFileHeader);
-}
-
-void Bitmap::setInfoHeader(const BITMAPINFOHEADER &bmpInfoHeader)
-{
-	m_bitmapInfoHeader = bmpInfoHeader;
-}
-
-BITMAPINFOHEADER Bitmap::getInfoHeader() const
-{
-	return(m_bitmapInfoHeader);
+  if(p_file != NULL)
+  {
+    fclose(p_file);
+    p_file = NULL;
+  }
 }
 
 void Bitmap::setPixelArray(unsigned char *pixelArray)
 {
-  if(p_pixelArray == NULL)
-    p_pixelArray = (unsigned char*)malloc(m_pixelArraySize);
+  DWORD pixelArraySize = calculatePixelArraySize();
+  if(pixelArraySize > 0)
+  {
+    if(p_pixelArray == NULL)
+      p_pixelArray = (unsigned char*)malloc(pixelArraySize);
 
-  memset(p_pixelArray, 0xff, m_pixelArraySize);
-  memcpy(p_pixelArray, pixelArray, m_pixelArraySize);
+    //memset(p_pixelArray, 0xff, m_pixelArraySize);
+    memcpy(p_pixelArray, pixelArray, pixelArraySize);
+  }
 }
 
-void Bitmap::setBitmapSize(DWORD size)
-{
-  this->m_bitmapFileHeader.m_size = size;
-  this->m_pixelArraySize = size - (14 + 40);
-}
-
-void Bitmap::setPixelArraySize(unsigned int size)
-{
-  this->m_bitmapFileHeader.m_size += size;
-  this->m_pixelArraySize = size;
-}
-
-void Bitmap::setBitmapWidth(LONG width)
+void Bitmap::setWidth(LONG width)
 {
   this->m_bitmapInfoHeader.m_width = width;
 }
 
-void Bitmap::setBitmapHeight(LONG height)
+void Bitmap::setHeight(LONG height)
 {
+  this->m_bitmapInfoHeader.m_height = -height;
+}
+
+void Bitmap::setSize(LONG width, LONG height)
+{
+  this->m_bitmapInfoHeader.m_width = width;
   this->m_bitmapInfoHeader.m_height = -height;
 }
 
@@ -107,19 +96,139 @@ void Bitmap::setBitCount(WORD bitCount)
   this->m_bitmapInfoHeader.m_bitCount = bitCount;
 }
 
-void Bitmap::write(char *filename)
+void Bitmap::writeToFile(char *filename)
 {
-  if (!(fopen_s(&p_file, filename, "wb")) && (m_pixelArraySize > 0))
+  DWORD pixelArraySize = calculatePixelArraySize();
+
+  if (!(fopen_s(&p_file, filename, "wb")) && (pixelArraySize > 0))
   {
+    // set proper size of the bitmap file including pixel array size.
+    if(m_bitmapFileHeader.m_size == (14 + 40))
+      m_bitmapFileHeader.m_size += pixelArraySize;
+
     fwrite(&m_bitmapFileHeader, sizeof(BITMAPFILEHEADER), 1, p_file);
     fwrite(&m_bitmapInfoHeader, sizeof(BITMAPINFOHEADER), 1, p_file);
-    fwrite(p_pixelArray, sizeof(unsigned char), m_pixelArraySize, p_file);
+    //if( convertRGBAToFileFormat() )
+      fwrite(p_pixelArray, sizeof(unsigned char), pixelArraySize, p_file);
 
     fclose(p_file);
   }
 }
 
-void Bitmap::show(char *filename)
+void Bitmap::readFromFile(char *filename)
 {
 
+}
+
+DWORD Bitmap::calculatePixelArraySize()
+{
+  DWORD pixelArraySize = 0;
+
+  if((abs(m_bitmapInfoHeader.m_width) > 0) && 
+      (abs(m_bitmapInfoHeader.m_height) > 0) && 
+      (m_bitmapInfoHeader.m_bitCount > 0))
+  {
+    // get Row size
+    DWORD rowSize = (DWORD)(floor((((abs(m_bitmapInfoHeader.m_bitCount) * abs(m_bitmapInfoHeader.m_width)) + 31)/32)) * 4);
+
+    // get Pixel Array Size
+    pixelArraySize = rowSize * abs(m_bitmapInfoHeader.m_height);
+  }
+
+  return(pixelArraySize);
+}
+
+void Bitmap::setPixel(int row, int col, const RGBApixel &rgbaPixel)
+{
+    setPixelLow(row, col, rgbaPixel.red, rgbaPixel.green, rgbaPixel.blue, rgbaPixel.alpha);
+}
+
+void Bitmap::setPixel(int row, int col, int red, int green, int blue)
+{
+  setPixelLow(row, col, red, green, blue, 0);
+}
+
+void Bitmap::setPixel(int row, int col, int red, int green, int blue, int alpha)
+{
+  setPixelLow(row, col, red, green, blue, alpha);
+}
+
+void Bitmap::setPixelLow(int row, int col, int red, int green, int blue, int alpha)
+{
+  int       c = getCurrentPos(row, col);
+
+  if(c != -1)
+  {
+    DWORD     pixelArraySize = calculatePixelArraySize();
+    if(p_pixelArray == NULL)
+    {
+        p_pixelArray = (unsigned char*)malloc(pixelArraySize);
+        memset(p_pixelArray, 0xff, pixelArraySize);
+    }
+
+    p_pixelArray[ c + 0 ] = (unsigned char)red;
+    p_pixelArray[ c + 1 ] = (unsigned char)green;
+    p_pixelArray[ c + 2 ] = (unsigned char)blue;
+  }
+}
+
+RGBApixel Bitmap::getPixel(int row, int col)
+{
+    RGBApixel rgbaPixel;
+
+    int c = getCurrentPos(row, col);
+    if(c != -1)
+    {
+        rgbaPixel.red = p_pixelArray[c + 0];
+        rgbaPixel.green = p_pixelArray[c + 1];
+        rgbaPixel.blue = p_pixelArray[c + 2];
+    }
+
+    return(rgbaPixel);
+}
+
+//bool Bitmap::convertRGBAToFileFormat()
+//{
+//  bool status = false;
+//  DWORD pixelArraySize = calculatePixelArraySize();
+//
+//  if(pixelArraySize > 0)
+//  {
+//    if(p_pixelArray == NULL)
+//      p_pixelArray = (unsigned char*)malloc(pixelArraySize);
+//
+//    if(p_pixelArray != NULL)
+//    {
+//      int c = 0;
+//      for(int i = 0; i < m_bitmapInfoHeader.m_width; ++i)
+//      {
+//        for(int j = 0; j < m_bitmapInfoHeader.m_height; ++j)
+//        {
+//          p_pixelArray[ c + 0 ] = m_pixels[i][j].red;
+//          p_pixelArray[ c + 1 ] = m_pixels[i][j].green;
+//          p_pixelArray[ c + 2 ] = m_pixels[i][j].blue;
+//
+//          c += 3;
+//        }
+//      }
+//
+//      status = true;
+//    }
+//  }
+//
+//  return(status);
+//}
+
+int Bitmap::getCurrentPos(int row, int col)
+{
+    int pos = -1;
+
+    if(((row >= 0) && (row < abs(m_bitmapInfoHeader.m_width))) && 
+        ((col >= 0) && (col < abs(m_bitmapInfoHeader.m_height))))
+    {
+        if((abs(m_bitmapInfoHeader.m_width) > 0) && (abs(m_bitmapInfoHeader.m_height) > 0))
+            pos = (row * abs(m_bitmapInfoHeader.m_height) * 3) + (col * 3);
+    }
+
+    return(pos);
 }
