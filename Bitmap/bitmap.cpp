@@ -16,7 +16,7 @@ Bitmap::Bitmap(LONG imageWidth, LONG imageHeight)
   p_file(NULL)
 {
   m_bitmapInfoHeader.m_width = imageWidth;
-  m_bitmapInfoHeader.m_height = imageHeight;
+  m_bitmapInfoHeader.m_height = -imageHeight;
   m_bitmapFileHeader.m_size += calculatePixelArraySize();
 }
 
@@ -27,7 +27,7 @@ Bitmap::Bitmap(LONG imageWidth, LONG imageHeight, WORD bitCount)
   p_file(NULL)
 {
   m_bitmapInfoHeader.m_width = imageWidth;
-  m_bitmapInfoHeader.m_height = imageHeight;
+  m_bitmapInfoHeader.m_height = -imageHeight;
   m_bitmapInfoHeader.m_bitCount = bitCount;
   m_bitmapFileHeader.m_size += calculatePixelArraySize();
 }

@@ -54,38 +54,6 @@ typedef struct BitmapFileHeader
   DWORD   m_offBits;
 }BITMAPFILEHEADER;
 
-struct RGBApixel
-{
-  RGBApixel()
-  {
-    red = 0;
-    green = 0;
-    blue = 0;
-    alpha = 0;
-  }
-
-  RGBApixel(unsigned char r, unsigned char g, unsigned char b)
-  {
-    red = r;
-    green = g;
-    blue = b;
-    alpha = 0;
-  }
-
-  RGBApixel(unsigned char r, unsigned char g, unsigned char b, unsigned char a)
-  {
-    red = r;
-    green = g;
-    blue = b;
-    alpha = a;
-  }
-
-  unsigned char red;
-  unsigned char green;
-  unsigned char blue;
-  unsigned char alpha;
-};
-
 // BITMAPINFOHEADER
 // Store the detailed information about BITMAP Image 
 // and define the pixel format.
@@ -138,6 +106,39 @@ typedef struct BitmapInfoHeader
 }BITMAPINFOHEADER;
 
 #pragma pack(pop)
+
+
+struct RGBApixel
+{
+  RGBApixel()
+  {
+    red = 0;
+    green = 0;
+    blue = 0;
+    alpha = 0;
+  }
+
+  RGBApixel(unsigned char r, unsigned char g, unsigned char b)
+  {
+    red = r;
+    green = g;
+    blue = b;
+    alpha = 0;
+  }
+
+  RGBApixel(unsigned char r, unsigned char g, unsigned char b, unsigned char a)
+  {
+    red = r;
+    green = g;
+    blue = b;
+    alpha = a;
+  }
+
+  unsigned char red;
+  unsigned char green;
+  unsigned char blue;
+  unsigned char alpha;
+};
 
 
 class Bitmap
