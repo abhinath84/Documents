@@ -15,8 +15,8 @@ Bitmap::Bitmap(LONG imageWidth, LONG imageHeight)
   p_pixelArray(NULL),
   p_file(NULL)
 {
-  m_bitmapInfoHeader.m_width = imageWidth;
-  m_bitmapInfoHeader.m_height = imageHeight;
+  setWidth(imageWidth);
+  setHeight(imageHeight);
   m_bitmapFileHeader.m_size += calculatePixelArraySize();
 }
 
@@ -26,9 +26,8 @@ Bitmap::Bitmap(LONG imageWidth, LONG imageHeight, WORD bitCount)
   p_pixelArray(NULL),
   p_file(NULL)
 {
-  m_bitmapInfoHeader.m_width = imageWidth;
-  m_bitmapInfoHeader.m_height = imageHeight;
-  m_bitmapInfoHeader.m_bitCount = bitCount;
+  setWidth(imageWidth);
+  setHeight(imageHeight);
   m_bitmapFileHeader.m_size += calculatePixelArraySize();
 }
 
@@ -60,6 +59,9 @@ Bitmap::~Bitmap()
     fclose(p_file);
     p_file = NULL;
   }
+
+  if(p_pixelArray != NULL)
+    free(p_pixelArray);
 }
 
 void Bitmap::setPixelArray(unsigned char *pixelArray)
@@ -87,8 +89,8 @@ void Bitmap::setHeight(LONG height)
 
 void Bitmap::setSize(LONG width, LONG height)
 {
-  this->m_bitmapInfoHeader.m_width = width;
-  this->m_bitmapInfoHeader.m_height = -height;
+  setWidth(width);
+  setHeight(height);
 }
 
 void Bitmap::setBitCount(WORD bitCount)
@@ -108,7 +110,7 @@ void Bitmap::writeToFile(char *filename)
 
     fwrite(&m_bitmapFileHeader, sizeof(BITMAPFILEHEADER), 1, p_file);
     fwrite(&m_bitmapInfoHeader, sizeof(BITMAPINFOHEADER), 1, p_file);
-    if( convertRGBAToFileFormat() )
+    //if( convertRGBAToFileFormat() )
       fwrite(p_pixelArray, sizeof(unsigned char), pixelArraySize, p_file);
 
     fclose(p_file);
@@ -120,7 +122,7 @@ void Bitmap::readFromFile(char *filename)
 
 }
 
-DWORD Bitmap::calculatePixelArraySize()
+DWORD Bitmap::calculatePixelArraySize() const
 {
   DWORD pixelArraySize = 0;
 
@@ -140,56 +142,63 @@ DWORD Bitmap::calculatePixelArraySize()
 
 void Bitmap::setPixel(int row, int col, const RGBApixel &rgbaPixel)
 {
-  m_pixels[row][col] = rgbaPixel;
+    setPixelLow(row, col, rgbaPixel.red, rgbaPixel.green, rgbaPixel.blue, rgbaPixel.alpha);
 }
 
 void Bitmap::setPixel(int row, int col, int red, int green, int blue)
 {
-  RGBApixel rgbaPixel((unsigned char)red, (unsigned char)green, (unsigned char)blue);
-
-  m_pixels[row][col] = rgbaPixel;
+  setPixelLow(row, col, red, green, blue, 0);
 }
 
 void Bitmap::setPixel(int row, int col, int red, int green, int blue, int alpha)
 {
-  RGBApixel rgbaPixel((unsigned char)red, (unsigned char)green, (unsigned char)blue, (unsigned char)alpha);
-
-  m_pixels[row][col] = rgbaPixel;
+  setPixelLow(row, col, red, green, blue, alpha);
 }
 
-RGBApixel Bitmap::getPixel(int row, int col)
+void Bitmap::setPixelLow(int row, int col, int red, int green, int blue, int alpha)
 {
-  return(m_pixels[row][col]);
-}
+  int       c = getCurrentPos(row, col);
 
-bool Bitmap::convertRGBAToFileFormat()
-{
-  bool status = false;
-  DWORD pixelArraySize = calculatePixelArraySize();
-
-  if(pixelArraySize > 0)
+  if(c != -1)
   {
-    if(p_pixelArray != NULL)
-      p_pixelArray = (unsigned char*)malloc(pixelArraySize);
-
-    if(p_pixelArray != NULL)
+    DWORD     pixelArraySize = calculatePixelArraySize();
+    if(p_pixelArray == NULL)
     {
-      int c = 0;
-      for(int i = 0; i < m_bitmapInfoHeader.m_width; ++i)
-      {
-        for(int j = 0; j < m_bitmapInfoHeader.m_height; ++j)
-        {
-          p_pixelArray[ c + 0 ] = m_pixels[i][j].red;
-          p_pixelArray[ c + 1 ] = m_pixels[i][j].green;
-          p_pixelArray[ c + 2 ] = m_pixels[i][j].blue;
-
-          c += 3;
-        }
-      }
-
-      status = true;
+        p_pixelArray = (unsigned char*)malloc(pixelArraySize);
+        memset(p_pixelArray, 0xff, pixelArraySize);
     }
-  }
 
-  return(status);
+    p_pixelArray[ c + 0 ] = (unsigned char)red;
+    p_pixelArray[ c + 1 ] = (unsigned char)green;
+    p_pixelArray[ c + 2 ] = (unsigned char)blue;
+  }
+}
+
+RGBApixel Bitmap::getPixel(int row, int col) const
+{
+    RGBApixel rgbaPixel;
+
+    int c = getCurrentPos(row, col);
+    if(c != -1)
+    {
+        rgbaPixel.red = p_pixelArray[c + 0];
+        rgbaPixel.green = p_pixelArray[c + 1];
+        rgbaPixel.blue = p_pixelArray[c + 2];
+    }
+
+    return(rgbaPixel);
+}
+
+int Bitmap::getCurrentPos(int row, int col) const
+{
+    int pos = -1;
+
+    if(((row >= 0) && (row < abs(m_bitmapInfoHeader.m_width))) && 
+        ((col >= 0) && (col < abs(m_bitmapInfoHeader.m_height))))
+    {
+        if((abs(m_bitmapInfoHeader.m_width) > 0) && (abs(m_bitmapInfoHeader.m_height) > 0))
+            pos = (row * abs(m_bitmapInfoHeader.m_height) * 3) + (col * 3);
+    }
+
+    return(pos);
 }
