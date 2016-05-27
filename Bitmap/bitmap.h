@@ -78,6 +78,7 @@ typedef struct BitmapFileHeader
                                     ///< structure to the bitmap bits. It must be = sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER)
 }BITMAPFILEHEADER;
 
+<<<<<<< HEAD
 
 //!  @struct  BITMAPINFOHEADER
 /*!
@@ -85,6 +86,11 @@ typedef struct BitmapFileHeader
   Store the detailed information about BITMAP Image and define the pixel format.
   In memory this structure immediately follows the BITMAP File Header (BITMAPFILEHEADER).
 */
+=======
+// BITMAPINFOHEADER
+// Store the detailed information about BITMAP Image 
+// and define the pixel format.
+>>>>>>> d521331875f6783e8856ce8fc1c2ef1ed7497ee6
 typedef struct BitmapInfoHeader
 {
   /// Default Constructor
@@ -144,6 +150,7 @@ typedef struct BitmapInfoHeader
 #pragma pack(pop)
 
 
+<<<<<<< HEAD
 //!  @struct  RGBApixel
 /*!
   This structure contains information about the color for each pixel of bitmap file.
@@ -152,6 +159,10 @@ typedef struct BitmapInfoHeader
 struct RGBApixel
 {
   /// Default Constructor
+=======
+struct RGBApixel
+{
+>>>>>>> d521331875f6783e8856ce8fc1c2ef1ed7497ee6
   RGBApixel()
   {
     red = 0;
@@ -160,7 +171,10 @@ struct RGBApixel
     alpha = 0;
   }
 
+<<<<<<< HEAD
   /// Argumented Constructor
+=======
+>>>>>>> d521331875f6783e8856ce8fc1c2ef1ed7497ee6
   RGBApixel(unsigned char r, unsigned char g, unsigned char b)
   {
     red = r;
@@ -169,7 +183,10 @@ struct RGBApixel
     alpha = 0;
   }
 
+<<<<<<< HEAD
   /// Argumented Constructor
+=======
+>>>>>>> d521331875f6783e8856ce8fc1c2ef1ed7497ee6
   RGBApixel(unsigned char r, unsigned char g, unsigned char b, unsigned char a)
   {
     red = r;
@@ -178,6 +195,7 @@ struct RGBApixel
     alpha = a;
   }
 
+<<<<<<< HEAD
   unsigned char red;                ///< The value of red color (Range: 0 to 255)
   unsigned char green;              ///< The value of green color (Range: 0 to 255)
   unsigned char blue;               ///< The value of blue color (Range: 0 to 255)
@@ -192,6 +210,15 @@ struct RGBApixel
   An Bitmap object encapsulates a bitmap or a metafile and 
   provides member functions to manipulate the bitmap.
 */
+=======
+  unsigned char red;
+  unsigned char green;
+  unsigned char blue;
+  unsigned char alpha;
+};
+
+
+>>>>>>> d521331875f6783e8856ce8fc1c2ef1ed7497ee6
 class Bitmap
 {
 public:
@@ -259,15 +286,27 @@ public:
   void readFromFile(char *filename);
 
 private:
+<<<<<<< HEAD
   DWORD calculatePixelArraySize() const;
   int   getCurrentPos(int row, int col) const;
+=======
+  DWORD calculatePixelArraySize();
+  //bool  convertRGBAToFileFormat();
+  int   getCurrentPos(int row, int col);
+>>>>>>> d521331875f6783e8856ce8fc1c2ef1ed7497ee6
   void  setPixelLow(int row, int col, int red, int green, int blue, int alpha);
 
 private:
   BITMAPFILEHEADER  m_bitmapFileHeader;
   BITMAPINFOHEADER  m_bitmapInfoHeader;
+<<<<<<< HEAD
   unsigned char    *p_pixelArray;
   FILE             *p_file;
+=======
+  unsigned char*    p_pixelArray;
+  //vector< vector<RGBApixel> > m_pixels;
+  FILE*             p_file;
+>>>>>>> d521331875f6783e8856ce8fc1c2ef1ed7497ee6
 };
 
 #endif

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /** 
 *  @file    bitmap.h
 *  @brief   class to handle bitmap file.
@@ -27,10 +28,25 @@ using namespace std;
 
 
 /// typedef
+=======
+#ifndef BITMAP_H
+#define BITMAP_H
+
+#include <stdio.h>
+#include <math.h>
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+// typedef
+>>>>>>> d521331875f6783e8856ce8fc1c2ef1ed7497ee6
 typedef unsigned short  WORD;
 typedef unsigned long   DWORD;
 typedef signed long     LONG;
 
+<<<<<<< HEAD
 /// define
 #define BI_RGB          0L      /// An uncomprassed format for bitmap
 
@@ -49,6 +65,22 @@ typedef signed long     LONG;
 typedef struct BitmapFileHeader
 {
   /// Default Constructor
+=======
+// define
+#define BI_RGB          0L
+
+
+// To pack a class is to place its members directly after each other in memory, 
+// which can mean that some or all members can be aligned on a boundary smaller 
+// than the default alignment the target architecture.
+#pragma pack(push, 2)
+
+
+// BITMAPFILEHEADER
+// Store the general information about  the  BITMAP Image File.
+typedef struct BitmapFileHeader
+{
+>>>>>>> d521331875f6783e8856ce8fc1c2ef1ed7497ee6
   BitmapFileHeader()
   {
     this->m_type  = 0x4d42;         // "BM"
@@ -58,8 +90,12 @@ typedef struct BitmapFileHeader
     this->m_offBits = (14 + 40);    //sizeof(BitmapFileHeader) + sizeof(BitmapInfoHeader);
   }
 
+<<<<<<< HEAD
   /// Argumented Constructor
   BitmapFileHeader(DWORD size, WORD res1 = 0, WORD res2 = 0)
+=======
+  BitmapFileHeader(DWORD size, WORD res1, WORD res2)
+>>>>>>> d521331875f6783e8856ce8fc1c2ef1ed7497ee6
   {
     this->m_type  = 0x4d42;         // "BM"
     this->m_size = size;
@@ -69,6 +105,7 @@ typedef struct BitmapFileHeader
   }
 
   // member variables.
+<<<<<<< HEAD
   WORD    m_type;                   ///< The file type; must be 'BM'.
   DWORD   m_size;                   ///< The size, in bytes, of the bitmap file. It must be :
                                     ///< = sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER) + sizeof(PixelArray)
@@ -88,6 +125,20 @@ typedef struct BitmapFileHeader
 typedef struct BitmapInfoHeader
 {
   /// Default Constructor
+=======
+  WORD    m_type;
+  DWORD   m_size;
+  WORD    m_reserved1;
+  WORD    m_reserved2;
+  DWORD   m_offBits;
+}BITMAPFILEHEADER;
+
+// BITMAPINFOHEADER
+// Store the detailed information about BITMAP Image 
+// and define the pixel format.
+typedef struct BitmapInfoHeader
+{
+>>>>>>> d521331875f6783e8856ce8fc1c2ef1ed7497ee6
   BitmapInfoHeader()
   {
     this->m_size = 40;                  //sizeof(BitmapInfoHeader);
@@ -103,8 +154,13 @@ typedef struct BitmapInfoHeader
     this->m_clrImportant = 0;
   }
 
+<<<<<<< HEAD
   /// Argumented Constructor
   BitmapInfoHeader(LONG width, LONG height, WORD bitCount, LONG xPelsPerMeter, 
+=======
+  BitmapInfoHeader(LONG width, LONG height, WORD bitCount, 
+                    DWORD sizeImage, LONG xPelsPerMeter, 
+>>>>>>> d521331875f6783e8856ce8fc1c2ef1ed7497ee6
                     LONG yPelsPerMeter, DWORD clrUsed, DWORD clrImportant)
   {
     this->m_size = 40;                  //sizeof(BitmapInfoHeader);
@@ -113,7 +169,11 @@ typedef struct BitmapInfoHeader
     this->m_planes = 1;
     this->m_bitCount = bitCount;
     this->m_compression = BI_RGB;
+<<<<<<< HEAD
     this->m_sizeImage = 0;
+=======
+    this->m_sizeImage = sizeImage;
+>>>>>>> d521331875f6783e8856ce8fc1c2ef1ed7497ee6
     this->m_xPelsPerMeter = xPelsPerMeter;
     this->m_yPelsPerMeter = yPelsPerMeter;
     this->m_clrUsed = clrUsed;
@@ -121,6 +181,7 @@ typedef struct BitmapInfoHeader
   }
 
   // member variables
+<<<<<<< HEAD
   DWORD      m_size;                ///< The number of bytes required by the structure.
   LONG       m_width;               ///< The width of the bitmap, in pixels.
   LONG       m_height;              ///< The height of the bitmap, in pixels. If biHeight is positive, the bitmap 
@@ -139,11 +200,25 @@ typedef struct BitmapInfoHeader
                                     ///< If this value is zero, the bitmap uses the maximum number of colors corresponding to 
                                     ///< the value of the biBitCount member for the compression mode specified by biCompression.
   DWORD      m_clrImportant;        ///< The number of color indexes that are required for displaying the bitmap. If this value is zero, all colors are required.
+=======
+  DWORD      m_size;
+  LONG       m_width;
+  LONG       m_height;
+  WORD       m_planes;
+  WORD       m_bitCount;
+  DWORD      m_compression;
+  DWORD      m_sizeImage;
+  LONG       m_xPelsPerMeter;
+  LONG       m_yPelsPerMeter;
+  DWORD      m_clrUsed;
+  DWORD      m_clrImportant;
+>>>>>>> d521331875f6783e8856ce8fc1c2ef1ed7497ee6
 }BITMAPINFOHEADER;
 
 #pragma pack(pop)
 
 
+<<<<<<< HEAD
 //!  @struct  RGBApixel
 /*!
   This structure contains information about the color for each pixel of bitmap file.
@@ -152,6 +227,10 @@ typedef struct BitmapInfoHeader
 struct RGBApixel
 {
   /// Default Constructor
+=======
+struct RGBApixel
+{
+>>>>>>> d521331875f6783e8856ce8fc1c2ef1ed7497ee6
   RGBApixel()
   {
     red = 0;
@@ -160,7 +239,10 @@ struct RGBApixel
     alpha = 0;
   }
 
+<<<<<<< HEAD
   /// Argumented Constructor
+=======
+>>>>>>> d521331875f6783e8856ce8fc1c2ef1ed7497ee6
   RGBApixel(unsigned char r, unsigned char g, unsigned char b)
   {
     red = r;
@@ -169,7 +251,10 @@ struct RGBApixel
     alpha = 0;
   }
 
+<<<<<<< HEAD
   /// Argumented Constructor
+=======
+>>>>>>> d521331875f6783e8856ce8fc1c2ef1ed7497ee6
   RGBApixel(unsigned char r, unsigned char g, unsigned char b, unsigned char a)
   {
     red = r;
@@ -178,6 +263,7 @@ struct RGBApixel
     alpha = a;
   }
 
+<<<<<<< HEAD
   unsigned char red;                ///< The value of red color (Range: 0 to 255)
   unsigned char green;              ///< The value of green color (Range: 0 to 255)
   unsigned char blue;               ///< The value of blue color (Range: 0 to 255)
@@ -249,6 +335,33 @@ public:
   void setPixel(int row, int col, int red, int green, int blue);
   void setPixel(int row, int col, int red, int green, int blue, int alpha);
   RGBApixel getPixel(int row, int col) const;
+=======
+  unsigned char red;
+  unsigned char green;
+  unsigned char blue;
+  unsigned char alpha;
+};
+
+
+class Bitmap
+{
+public:
+  Bitmap();
+  Bitmap(LONG imageWidth, LONG imageHeight);
+  Bitmap(LONG imageWidth, LONG imageHeight, WORD bitCount);
+  Bitmap(const Bitmap &other);
+  ~Bitmap(void);
+
+  Bitmap& operator=(const Bitmap &other);
+
+  // Methods
+  void setPixelArray(unsigned char *pixelArray);
+
+  void setPixel(int row, int col, const RGBApixel &rgbaPixel);
+  void setPixel(int row, int col, int red, int green, int blue);
+  void setPixel(int row, int col, int red, int green, int blue, int alpha);
+  RGBApixel getPixel(int row, int col);
+>>>>>>> d521331875f6783e8856ce8fc1c2ef1ed7497ee6
 
   void setWidth(LONG width);
   void setHeight(LONG height);
@@ -259,15 +372,27 @@ public:
   void readFromFile(char *filename);
 
 private:
+<<<<<<< HEAD
   DWORD calculatePixelArraySize() const;
   int   getCurrentPos(int row, int col) const;
+=======
+  DWORD calculatePixelArraySize();
+  //bool  convertRGBAToFileFormat();
+  int   getCurrentPos(int row, int col);
+>>>>>>> d521331875f6783e8856ce8fc1c2ef1ed7497ee6
   void  setPixelLow(int row, int col, int red, int green, int blue, int alpha);
 
 private:
   BITMAPFILEHEADER  m_bitmapFileHeader;
   BITMAPINFOHEADER  m_bitmapInfoHeader;
+<<<<<<< HEAD
   unsigned char    *p_pixelArray;
   FILE             *p_file;
+=======
+  unsigned char*    p_pixelArray;
+  //vector< vector<RGBApixel> > m_pixels;
+  FILE*             p_file;
+>>>>>>> d521331875f6783e8856ce8fc1c2ef1ed7497ee6
 };
 
 #endif

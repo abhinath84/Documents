@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 F:\PTC_ME\MY PROJECTS\C++\OTHERS\QRGENERATOR\DEBUG\QRGENERATOR.BSC
 F:\PTC_ME\MY PROJECTS\C++\OTHERS\QRGENERATOR\QRGENERATOR\DEBUG\STDAFX.SBR
 F:\PTC_ME\MY PROJECTS\C++\OTHERS\QRGENERATOR\QRGENERATOR\DEBUG\QRGENERATOR.SBR
@@ -70,3 +71,77 @@ F:\PTC_Me\My Projects\C++\Others\QRGenerator\Debug\QRGenerator.pdb
 F:\PTC_Me\My Projects\C++\Others\QRGenerator\Debug\QRGenerator.exe
 F:\PTC_Me\My Projects\C++\Others\QRGenerator\Debug\QRGenerator.bsc
 F:\PTC_Me\My Projects\C++\Others\QRGenerator\Debug\QRGenerator.ilk
+=======
+E:\PROJECT\PRACTICE\C++\QRGENERATOR\DEBUG\QRGENERATOR.BSC
+E:\PROJECT\PRACTICE\C++\QRGENERATOR\QRGENERATOR\DEBUG\STDAFX.SBR
+E:\PROJECT\PRACTICE\C++\QRGENERATOR\QRGENERATOR\DEBUG\QRGENERATOR.SBR
+E:\PROJECT\PRACTICE\C++\QRGENERATOR\QRGENERATOR\DEBUG\BITMAP.SBR
+E:\PROJECT\PRACTICE\C++\QRGENERATOR\QRGENERATOR\DEBUG\BITMAP.OBJ
+E:\PROJECT\PRACTICE\C++\QRGENERATOR\QRGENERATOR\DEBUG\QRGENERATOR.OBJ
+E:\PROJECT\PRACTICE\C++\QRGENERATOR\QRGENERATOR\DEBUG\STDAFX.OBJ
+E:\PROJECT\PRACTICE\C++\QRGENERATOR\QRGENERATOR\DEBUG\VC110.PDB
+E:\PROJECT\PRACTICE\C++\QRGENERATOR\QRGENERATOR\DEBUG\SPLIT.SBR
+E:\PROJECT\PRACTICE\C++\QRGENERATOR\QRGENERATOR\DEBUG\RSCODE.SBR
+E:\PROJECT\PRACTICE\C++\QRGENERATOR\QRGENERATOR\DEBUG\QRSPEC.SBR
+E:\PROJECT\PRACTICE\C++\QRGENERATOR\QRGENERATOR\DEBUG\QRINPUT.SBR
+E:\PROJECT\PRACTICE\C++\QRGENERATOR\QRGENERATOR\DEBUG\QRENCODE.SBR
+E:\PROJECT\PRACTICE\C++\QRGENERATOR\QRGENERATOR\DEBUG\MQRSPEC.SBR
+E:\PROJECT\PRACTICE\C++\QRGENERATOR\QRGENERATOR\DEBUG\MMASK.SBR
+E:\PROJECT\PRACTICE\C++\QRGENERATOR\QRGENERATOR\DEBUG\MASK.SBR
+E:\PROJECT\PRACTICE\C++\QRGENERATOR\QRGENERATOR\DEBUG\BITSTREAM.SBR
+E:\PROJECT\PRACTICE\C++\QRGENERATOR\QRGENERATOR\DEBUG\BITSTREAM.OBJ
+E:\PROJECT\PRACTICE\C++\QRGENERATOR\QRGENERATOR\DEBUG\MASK.OBJ
+E:\PROJECT\PRACTICE\C++\QRGENERATOR\QRGENERATOR\DEBUG\MMASK.OBJ
+E:\PROJECT\PRACTICE\C++\QRGENERATOR\QRGENERATOR\DEBUG\MQRSPEC.OBJ
+E:\PROJECT\PRACTICE\C++\QRGENERATOR\QRGENERATOR\DEBUG\QRENCODE.OBJ
+E:\PROJECT\PRACTICE\C++\QRGENERATOR\QRGENERATOR\DEBUG\QRINPUT.OBJ
+E:\PROJECT\PRACTICE\C++\QRGENERATOR\QRGENERATOR\DEBUG\QRSPEC.OBJ
+E:\PROJECT\PRACTICE\C++\QRGENERATOR\QRGENERATOR\DEBUG\RSCODE.OBJ
+E:\PROJECT\PRACTICE\C++\QRGENERATOR\QRGENERATOR\DEBUG\SPLIT.OBJ
+E:\PROJECT\PRACTICE\C++\QRGENERATOR\DEBUG\QRGENERATOR.ILK
+E:\PROJECT\PRACTICE\C++\QRGENERATOR\DEBUG\QRGENERATOR.EXE
+E:\PROJECT\PRACTICE\C++\QRGENERATOR\DEBUG\QRGENERATOR.PDB
+E:\Project\Practice\C++\QRGenerator\QRGenerator\Debug\bitmap.obj
+E:\Project\Practice\C++\QRGenerator\QRGenerator\Debug\bitstream.obj
+E:\Project\Practice\C++\QRGenerator\QRGenerator\Debug\mask.obj
+E:\Project\Practice\C++\QRGenerator\QRGenerator\Debug\mmask.obj
+E:\Project\Practice\C++\QRGenerator\QRGenerator\Debug\mqrspec.obj
+E:\Project\Practice\C++\QRGenerator\QRGenerator\Debug\qrencode.obj
+E:\Project\Practice\C++\QRGenerator\QRGenerator\Debug\QRGenerator.obj
+E:\Project\Practice\C++\QRGenerator\QRGenerator\Debug\qrinput.obj
+E:\Project\Practice\C++\QRGenerator\QRGenerator\Debug\qrspec.obj
+E:\Project\Practice\C++\QRGenerator\QRGenerator\Debug\rscode.obj
+E:\Project\Practice\C++\QRGenerator\QRGenerator\Debug\split.obj
+E:\Project\Practice\C++\QRGenerator\QRGenerator\Debug\stdafx.obj
+E:\Project\Practice\C++\QRGenerator\QRGenerator\Debug\BscMake.command.1.tlog
+E:\Project\Practice\C++\QRGenerator\QRGenerator\Debug\bscmake.read.1.tlog
+E:\Project\Practice\C++\QRGenerator\QRGenerator\Debug\BscMake.write.1.tlog
+E:\Project\Practice\C++\QRGenerator\QRGenerator\Debug\cl.command.1.tlog
+E:\Project\Practice\C++\QRGenerator\QRGenerator\Debug\CL.read.1.tlog
+E:\Project\Practice\C++\QRGenerator\QRGenerator\Debug\CL.write.1.tlog
+E:\Project\Practice\C++\QRGenerator\QRGenerator\Debug\link-cvtres.read.1.tlog
+E:\Project\Practice\C++\QRGenerator\QRGenerator\Debug\link-cvtres.write.1.tlog
+E:\Project\Practice\C++\QRGenerator\QRGenerator\Debug\link-rc.read.1.tlog
+E:\Project\Practice\C++\QRGenerator\QRGenerator\Debug\link-rc.write.1.tlog
+E:\Project\Practice\C++\QRGenerator\QRGenerator\Debug\link.command.1.tlog
+E:\Project\Practice\C++\QRGenerator\QRGenerator\Debug\link.read.1.tlog
+E:\Project\Practice\C++\QRGenerator\QRGenerator\Debug\link.write.1.tlog
+E:\Project\Practice\C++\QRGenerator\QRGenerator\Debug\vc110.idb
+E:\Project\Practice\C++\QRGenerator\QRGenerator\Debug\vc110.pdb
+E:\Project\Practice\C++\QRGenerator\QRGenerator\Debug\bitmap.sbr
+E:\Project\Practice\C++\QRGenerator\QRGenerator\Debug\bitstream.sbr
+E:\Project\Practice\C++\QRGenerator\QRGenerator\Debug\mask.sbr
+E:\Project\Practice\C++\QRGenerator\QRGenerator\Debug\mmask.sbr
+E:\Project\Practice\C++\QRGenerator\QRGenerator\Debug\mqrspec.sbr
+E:\Project\Practice\C++\QRGenerator\QRGenerator\Debug\qrencode.sbr
+E:\Project\Practice\C++\QRGenerator\QRGenerator\Debug\QRGenerator.sbr
+E:\Project\Practice\C++\QRGenerator\QRGenerator\Debug\qrinput.sbr
+E:\Project\Practice\C++\QRGenerator\QRGenerator\Debug\qrspec.sbr
+E:\Project\Practice\C++\QRGenerator\QRGenerator\Debug\rscode.sbr
+E:\Project\Practice\C++\QRGenerator\QRGenerator\Debug\split.sbr
+E:\Project\Practice\C++\QRGenerator\QRGenerator\Debug\stdafx.sbr
+E:\Project\Practice\C++\QRGenerator\Debug\QRGenerator.pdb
+E:\Project\Practice\C++\QRGenerator\Debug\QRGenerator.exe
+E:\Project\Practice\C++\QRGenerator\Debug\QRGenerator.bsc
+E:\Project\Practice\C++\QRGenerator\Debug\QRGenerator.ilk
+>>>>>>> d521331875f6783e8856ce8fc1c2ef1ed7497ee6

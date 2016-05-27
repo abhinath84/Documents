@@ -15,8 +15,13 @@ Bitmap::Bitmap(LONG imageWidth, LONG imageHeight)
   p_pixelArray(NULL),
   p_file(NULL)
 {
+<<<<<<< HEAD
   setWidth(imageWidth);
   setHeight(imageHeight);
+=======
+  m_bitmapInfoHeader.m_width = imageWidth;
+  m_bitmapInfoHeader.m_height = -imageHeight;
+>>>>>>> d521331875f6783e8856ce8fc1c2ef1ed7497ee6
   m_bitmapFileHeader.m_size += calculatePixelArraySize();
 }
 
@@ -26,8 +31,14 @@ Bitmap::Bitmap(LONG imageWidth, LONG imageHeight, WORD bitCount)
   p_pixelArray(NULL),
   p_file(NULL)
 {
+<<<<<<< HEAD
   setWidth(imageWidth);
   setHeight(imageHeight);
+=======
+  m_bitmapInfoHeader.m_width = imageWidth;
+  m_bitmapInfoHeader.m_height = -imageHeight;
+  m_bitmapInfoHeader.m_bitCount = bitCount;
+>>>>>>> d521331875f6783e8856ce8fc1c2ef1ed7497ee6
   m_bitmapFileHeader.m_size += calculatePixelArraySize();
 }
 
@@ -59,9 +70,12 @@ Bitmap::~Bitmap()
     fclose(p_file);
     p_file = NULL;
   }
+<<<<<<< HEAD
 
   if(p_pixelArray != NULL)
     free(p_pixelArray);
+=======
+>>>>>>> d521331875f6783e8856ce8fc1c2ef1ed7497ee6
 }
 
 void Bitmap::setPixelArray(unsigned char *pixelArray)
@@ -89,8 +103,13 @@ void Bitmap::setHeight(LONG height)
 
 void Bitmap::setSize(LONG width, LONG height)
 {
+<<<<<<< HEAD
   setWidth(width);
   setHeight(height);
+=======
+  this->m_bitmapInfoHeader.m_width = width;
+  this->m_bitmapInfoHeader.m_height = -height;
+>>>>>>> d521331875f6783e8856ce8fc1c2ef1ed7497ee6
 }
 
 void Bitmap::setBitCount(WORD bitCount)
@@ -122,7 +141,11 @@ void Bitmap::readFromFile(char *filename)
 
 }
 
+<<<<<<< HEAD
 DWORD Bitmap::calculatePixelArraySize() const
+=======
+DWORD Bitmap::calculatePixelArraySize()
+>>>>>>> d521331875f6783e8856ce8fc1c2ef1ed7497ee6
 {
   DWORD pixelArraySize = 0;
 
@@ -174,7 +197,11 @@ void Bitmap::setPixelLow(int row, int col, int red, int green, int blue, int alp
   }
 }
 
+<<<<<<< HEAD
 RGBApixel Bitmap::getPixel(int row, int col) const
+=======
+RGBApixel Bitmap::getPixel(int row, int col)
+>>>>>>> d521331875f6783e8856ce8fc1c2ef1ed7497ee6
 {
     RGBApixel rgbaPixel;
 
@@ -189,7 +216,43 @@ RGBApixel Bitmap::getPixel(int row, int col) const
     return(rgbaPixel);
 }
 
+<<<<<<< HEAD
 int Bitmap::getCurrentPos(int row, int col) const
+=======
+//bool Bitmap::convertRGBAToFileFormat()
+//{
+//  bool status = false;
+//  DWORD pixelArraySize = calculatePixelArraySize();
+//
+//  if(pixelArraySize > 0)
+//  {
+//    if(p_pixelArray == NULL)
+//      p_pixelArray = (unsigned char*)malloc(pixelArraySize);
+//
+//    if(p_pixelArray != NULL)
+//    {
+//      int c = 0;
+//      for(int i = 0; i < m_bitmapInfoHeader.m_width; ++i)
+//      {
+//        for(int j = 0; j < m_bitmapInfoHeader.m_height; ++j)
+//        {
+//          p_pixelArray[ c + 0 ] = m_pixels[i][j].red;
+//          p_pixelArray[ c + 1 ] = m_pixels[i][j].green;
+//          p_pixelArray[ c + 2 ] = m_pixels[i][j].blue;
+//
+//          c += 3;
+//        }
+//      }
+//
+//      status = true;
+//    }
+//  }
+//
+//  return(status);
+//}
+
+int Bitmap::getCurrentPos(int row, int col)
+>>>>>>> d521331875f6783e8856ce8fc1c2ef1ed7497ee6
 {
     int pos = -1;
 
