@@ -12,3 +12,6 @@
     - https://www.youtube.com/watch?v=5RQbdMn04Oc
     - https://docs.docker.com/desktop/windows/install/
     - https://docs.docker.com/desktop/windows/wsl/
+
+- Install 'vs code' in wsl2
+    - https://docs.microsoft.com/en-us/windows/dev-environment/javascript/nodejs-on-wsl
