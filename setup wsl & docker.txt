@@ -1,0 +1,14 @@
+- Setup wsl/wsl2
+    - https://www.youtube.com/watch?v=_fntjriRe48
+    - https://docs.microsoft.com/en-us/windows/wsl/
+    
+    - Update wsl
+        - https://docs.microsoft.com/en-us/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package
+    - ERROR : "Logon failure: the user has not been granted the requested logon type at this computer."
+        - https://stackoverflow.com/questions/62681041/ubuntu-18-04-on-wsl2-logon-failure-the-user-has-not-been-granted-the-requeste
+        - https://github.com/microsoft/WSL/issues/5401
+
+- Setup docker
+    - https://www.youtube.com/watch?v=5RQbdMn04Oc
+    - https://docs.docker.com/desktop/windows/install/
+    - https://docs.docker.com/desktop/windows/wsl/
