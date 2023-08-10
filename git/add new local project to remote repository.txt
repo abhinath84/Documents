@@ -15,5 +15,5 @@ Add new local repo in remote:
  - push local project to remote git repo
    -> git push -u origin master
 
- - you done!
+ - you are done!
 
