@@ -16,3 +16,4 @@
 
 - Install 'vs code' in wsl2
     - https://docs.microsoft.com/en-us/windows/dev-environment/javascript/nodejs-on-wsl
+    - https://github.com/VSCodium/vscodium/issues/1265 (Make the WSL remote extension work in VS Codium)
