@@ -1,17 +1,19 @@
 ## steps:
 - create ssh key for each account.
-  `ssh-keygen -t rsa -C "<comment>" -f "<ssh-key-file-name>"`
+```
+ssh-keygen -t rsa -C "<comment>" -f "<ssh-key-file-name>"
+```
 - open github/gitlab web-page and create 'add new key' & paste content of "<ssh-key-file-name>.pub".
 - create "~/.ssh/config" file. (if not present)
 - add HOST entry for above ssh key.
-  sample:
-    ```
-      # github-personal
-      Host github.com
-        HostName github.com
-        User git
-        IdentityFile ~/.ssh/github-personal
-    ```
+sample:
+```
+  # github-personal
+  Host github.com
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/github-personal
+```
 - repeate above steps for each newly created key.
 
 ## References:
