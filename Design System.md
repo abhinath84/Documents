@@ -27,3 +27,4 @@
 - [Design System in Figma](https://designcode.io/design-system-in-figma)
 - [Lesson 3: Build your design system](https://help.figma.com/hc/en-us/articles/14548865734679-Lesson-3-Build-your-design-system)
 - [Master Variables in Figma to create advanced models](https://www.digidop.fr/en/blog/figma-revolution-variables-advanced-model-design-process)
+- [Creating a responsive component with boolean variables / Figma](https://www.youtube.com/watch?v=KvyJHhn_5FY)
