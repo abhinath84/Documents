@@ -19,6 +19,14 @@
 - [Upgrade your design system in Figma: add color variables in 15 minutes](https://medium.com/@lena.kaazik/upgrade-your-design-system-in-figma-add-color-variables-in-15-minutes-68916862e3fa)
 - [Color palettes](https://carbondesignsystem.com/data-visualization/color-palettes/)
 
+### Spacing
+
+- [Atlassian Design System - Spacing](https://atlassian.design/foundations/spacing)
+- [Carbon Design System - Spacing](https://carbondesignsystem.com/guidelines/spacing/overview/#spacing)
+- [Formula Design System - Spacing](https://developer.microsoft.com/en-us/azure-devops/design-basics/spacing)
+- [Material Design - Spacing](https://m2.material.io/design/layout/spacing-methods.html#baseline-grid)
+- [pace, grids, and layouts](https://www.designsystems.com/space-grids-and-layouts/)
+
 ## Figma
 
 - [How I Structured My Design System Using Figma’s New Variables](https://bootcamp.uxdesign.cc/how-i-structured-my-design-system-using-figmas-new-variables-7b1be33ce2aa)
