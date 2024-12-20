@@ -44,3 +44,4 @@ $ g++ --version
 
 - [Kitware APT Repository](https://apt.kitware.com/)
 - [How to Install CMake on Ubuntu 24.04, 22.04 or 20.04](https://linuxcapable.com/how-to-install-cmake-on-ubuntu-linux/)
+- [How to Install GCC and G++ Compiler on Ubuntu 24.04 LTS (Linux) (2024)](https://www.youtube.com/watch?v=ndc8oDSNZzQ)
