@@ -39,3 +39,8 @@ $ gcc --version
 # g++
 $ g++ --version
 ```
+
+## Reference
+
+- [Kitware APT Repository](https://apt.kitware.com/)
+- [How to Install CMake on Ubuntu 24.04, 22.04 or 20.04](https://linuxcapable.com/how-to-install-cmake-on-ubuntu-linux/)
