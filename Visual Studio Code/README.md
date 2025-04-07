@@ -1,4 +1,12 @@
-Visual Studio Code - Setup and debug C++ project (Linux)
+# Introduction
+
+Visual Studio Code / VSCodium related stuff.
+
+## Settings
+
+- [Keyboard shortcuts for macOS](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-macos.pdf)
+
+## Visual Studio Code - Setup and debug C++ project (Linux)
 
 - Create/Open a VSC Project
 	- Create a new project
@@ -23,14 +31,14 @@ Visual Studio Code - Setup and debug C++ project (Linux)
 
 
 - Build Setting for project
-	- To build the project you have to create a 'task' (which having setting for build). 
+	- To build the project you have to create a 'task' (which having setting for build).
 	  Do the following steps to create a 'task':
 		- Press 'Ctrl+P', a search window will appear at the top of the dashboard.
 		- In search window, write '> configure'.
 		- Then select 'Tasks: Configure Task Runner' from dropdown menu.
 		- Select 'Others' from dropdown menu.
 		- A 'task.json' file will open.
-		- Delete entire existing code and replace it by following code:			
+		- Delete entire existing code and replace it by following code:
 		- 	{
 			    "version": "0.1.0",
 			    "command": "make",
@@ -60,7 +68,7 @@ Visual Studio Code - Setup and debug C++ project (Linux)
 				}
 			    ]
 			}
-		
+
 		- Now save the 'tasks.json' file.
 
 	- Now set the shortcut key for build.
@@ -72,7 +80,7 @@ Visual Studio Code - Setup and debug C++ project (Linux)
 		  { "key": "ctrl+shift+b",          "command": "workbench.action.tasks.build" }
 		- You can change the "key" or leave as it is and use that keyboard shortcut to build the project.
 		- If you change the shortcut then save the file.
-		
+
 		- If 'workbench.action.tasks.build' keyword is not present in the 'Default keyboard shortcut' window then
     		  add a new entry for it.
 		- Add following line at the end of the array before "]".
@@ -96,5 +104,3 @@ Visual Studio Code - Setup and debug C++ project (Linux)
 	- Now set break points in the source file.
 	- Then select 'C++ Launch(GDB)' from DEBUG dropdown option.
 	- Finally press green colored 'Start' button and enjoy the debugging.
-
-
