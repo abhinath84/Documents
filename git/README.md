@@ -135,7 +135,73 @@ sample:
 ```
 - repeate above steps for each newly created key.
 
-### References:
+## How to Change Remote Repo from `master` to `main` in GitLab
+
+### 1. Create the `main` branch locally (if it doesn't exist)
+
+```bash
+git checkout master
+git checkout -b main
+```
+
+### 2. Push `main` to GitLab
+
+```bash
+git push -u origin main
+```
+
+### 3. Change the default branch in GitLab
+
+1. Go to your project in GitLab
+2. Navigate to **Settings** → **Repository**
+3. Expand the **Branch defaults** section
+4. Change the **Default branch** from `master` to `main`
+5. Click **Save changes**
+
+### 4. Update branch protection rules (if applicable)
+
+1. Still in **Settings** → **Repository**
+2. Expand **Protected branches**
+3. Add protection rules for `main` (matching what you had for `master`)
+4. Optionally remove protection from `master`
+
+### 5. Update your local repository
+
+```bash
+git checkout main
+git branch -d master
+git remote set-head origin main
+```
+
+### 6. Delete the old `master` branch on GitLab
+
+You can do this via the UI:
+
+1. Go to **Repository** → **Branches**
+2. Find `master` and click the delete button
+
+Or via command line:
+
+```bash
+git push origin --delete master
+```
+
+### 7. Notify your team
+
+Other team members will need to update their local repos:
+
+```bash
+git fetch origin
+git checkout main
+git branch -d master
+git remote set-head origin main
+```
+
+---
+
+**Note:** If you have CI/CD pipelines, merge requests, or other integrations that reference `master`, make sure to update those references to `main` as well.
+
+## References:
 
 - https://gist.github.com/rahularity/86da20fe3858e6b311de068201d279e3
 - https://gist.github.com/jexchan/2351996
