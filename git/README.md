@@ -177,7 +177,7 @@ git remote set-head origin main
 
 You can do this via the UI:
 
-1. Go to **Repository** → **Branches**
+1. Go to **Code** → **Branches**
 2. Find `master` and click the delete button
 
 Or via command line:
