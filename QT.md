@@ -11,6 +11,10 @@
 #### qmake to cmake
 - https://pvs-studio.com/en/blog/posts/cpp/0967/
 
+### WSL
+- [Using Windows Subsystem for Linux (WSL) for C++ and Qt Application Development](https://www.youtube.com/watch?v=ijwFOcouYgg)
+- [Using Visual Studio Code for Developing C++/Qt Linux Applications in WSL](https://www.youtube.com/watch?v=HTpjoA1Cr7A)
+
 ## Deployment
 - https://doc.qt.io/qt-6/windows-deployment.html
 - https://wiki.qt.io/Deploy_an_Application_on_Windows
